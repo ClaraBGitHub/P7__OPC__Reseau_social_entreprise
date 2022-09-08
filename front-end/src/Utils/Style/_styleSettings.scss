@@ -1,0 +1,34 @@
+@font-face {
+    font-family: "Laro";
+    src: url(../Style//Font/Lato-Regular.ttf);
+}
+
+* {
+    font-family: "Laro";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+  
+$primary-color: #FD2D01;
+$secondary-color: #FFD7D7;
+$tertiary-color: #4E5166;
+$Cream: #f2ecec;
+$grey: #bababa;
+$black: #000000;
+
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    width: 100%;
+    background: $Cream;
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 481px

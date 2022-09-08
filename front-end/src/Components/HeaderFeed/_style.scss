@@ -1,0 +1,25 @@
+@import "../../Utils/Style/styleSettings";
+
+.headerBlocFeed {
+    width: calc(100% / 2);
+}
+.welcomeNav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.navbar {
+    &__signout {
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    }
+}
+
+h1 {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    padding: 10px;
+}

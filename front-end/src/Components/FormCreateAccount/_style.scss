@@ -1,0 +1,51 @@
+@import "../../Utils/Style/styleSettings";
+
+.form {
+  @include flex-center();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    background-color: $tertiary-color;
+    border-radius: 30px;
+    width: 50%;
+    transition: 200ms;
+    margin: 10px;
+    &__input-group {
+      padding: 10px;
+      margin: 10px;
+      flex-direction: raw;
+      display: flex;
+      label {
+        padding: 10px;
+        margin: auto;
+        color : $Cream;
+        display: flex;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      box-shadow: 2px 2px 10px #e2e3e9;
+    }
+    &__input-btn {
+      width: 80%;
+      margin: 10px;
+      border-radius: 2px;
+      background: $tertiary-color;
+      color: $Cream;
+      align-items: center;
+      padding: 10px 9px 10px 11px;
+      text-transform: uppercase;
+
+      &:hover {
+        cursor: pointer;
+        background: $secondary-color;
+        color: $tertiary-color;
+        transition: all 0.4s ease-out;
+      }
+
+    }
+    &__input-login{
+      color: $Cream;
+    }
+}
