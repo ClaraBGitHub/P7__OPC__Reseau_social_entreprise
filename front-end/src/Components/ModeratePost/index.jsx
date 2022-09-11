@@ -12,7 +12,6 @@ const ModeratePostButton = ({ id }) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    // Accept: 'application/json',
   }
   const postToModerate = {
     moderated: 1,
@@ -44,7 +43,6 @@ const ModeratePostButton = ({ id }) => {
             'Vous avez annulé la moderation de ce post, il sera désormais visible des autres utilisateurs'
           )
           if (res.status == 200) setModeratedPost(true)
-          // document.location.reload()
         })
     } else {
       axios
@@ -58,7 +56,6 @@ const ModeratePostButton = ({ id }) => {
             'Vous avez modéré ce post, il ne sera plus visible des autres utilisateurs'
           )
           if (res.status == 200) setModeratedPost(false)
-          // document.location.reload()
         })
     }
   }

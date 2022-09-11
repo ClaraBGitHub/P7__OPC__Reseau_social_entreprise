@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { AlertTitle } from '@mui/material'
-import { Alert } from '@mui/material'
+// import { AlertTitle } from '@mui/material'
+// import { Alert } from '@mui/material'
 import { useState } from 'react'
 import './_style.scss'
 
 const DeletePost = ({ id }) => {
-  // const [sucessMessage, setSucessMessage] = useState(false)
   const [postDelete, setPostDelete] = useState(false)
   let [postInfo, setpostInfo] = useState([])
   let [userInfo, setUserInfo] = useState([])
@@ -33,8 +32,6 @@ const DeletePost = ({ id }) => {
   }, [])
 
   const handleDeletePost = () => {
-    // if (window.confirm('Êtes-vous sûr de vouloir supprimer ce post?')) return
-    // console.log(id)
     axios.delete(`http://localhost:4200/api/post/${id}`, config).then((res) => {
       if (res.status == 200)
         setTimeout(function () {

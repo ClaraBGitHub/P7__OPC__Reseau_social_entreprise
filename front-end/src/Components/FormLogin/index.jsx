@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import './_style.scss'
 import axios from 'axios'
@@ -27,7 +26,6 @@ const FormLogin = () => {
       )
       .then((res) => {
         if (res.status == 200) {
-          console.log(res)
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('userId', res.data.userId)
           window.location.href = '/'
@@ -48,9 +46,7 @@ const FormLogin = () => {
           id="email"
           placeholder="Email"
           required
-          onChange={
-            (e) => setEmail(e.target.value) // The spread operator allow me to access to all the information inside my userSignup const.
-          }
+          onChange={(e) => setEmail(e.target.value)}
         ></input>
       </div>
       <div className="form__input-group">

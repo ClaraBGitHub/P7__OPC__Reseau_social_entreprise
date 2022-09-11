@@ -5,32 +5,12 @@ import './_style.scss'
 import axios from 'axios'
 
 const FormCreateAccount = () => {
-  // States
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
 
-  const {
-    handleSubmit,
-    // formState: { errors },
-  } = useForm()
-
-  // const submitRegister = (e) => {
-  //   const { id, value } = e.target
-  //   if (id === 'firstname') {
-  //     setFirstname(value)
-  //   }
-  //   if (id === 'lastname') {
-  //     setLastname(value)
-  //   }
-  //   if (id === 'email') {
-  //     setEmail(value)
-  //   }
-  //   if (id === 'password') {
-  //     setPassword(value)
-  //   }
-  // }
+  const { handleSubmit } = useForm()
 
   const onSubmit = (e) => {
     let object = {
@@ -57,8 +37,6 @@ const FormCreateAccount = () => {
           config
         )
         .then((res) => {
-          console.log(res)
-          console.log(res.data)
           alert(
             'Votre compte est désormais créé! Connectez-vous pour discuter avec vos collègues'
           )
@@ -139,9 +117,7 @@ const FormCreateAccount = () => {
           placeholder="Email"
           value={email}
           required
-          onChange={
-            (e) => setEmail(e.target.value) // The spread operator allow me to access to all the information inside my userSignup const.
-          }
+          onChange={(e) => setEmail(e.target.value)}
         ></input>
         <div className="email-error"></div>
       </div>
@@ -166,7 +142,6 @@ const FormCreateAccount = () => {
           placeholder="Prénom"
           required
           onChange={(e) => setFirstname(e.target.value)}
-          // onBlur={(e) => checkFirstName(e.target.value)}
         ></input>
         <div className="firstname-error"></div>
       </div>

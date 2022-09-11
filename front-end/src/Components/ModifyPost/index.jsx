@@ -16,7 +16,7 @@ const ModifyPost = ({ id }) => {
   const userId = localStorage.getItem('userId')
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   }
@@ -49,13 +49,16 @@ const ModifyPost = ({ id }) => {
   const handleModifiePost = (e) => {
     e.preventDefault()
     const formData = new FormData()
-    formData.append('userId', userId)
-    formData.append('title', title)
-    formData.append('author', userInfo.firstname)
-    formData.append('publication', publication)
+    if (title) {
+      formData.append('title', title)
+    }
+    if (publication) {
+      formData.append('publication', publication)
+    }
+    if (selectedFile) {
+      formData.append('image', selectedFile)
+    }
     formData.append('date', dateActuelle)
-    formData.append('image', selectedFile)
-    console.log(formData)
     // if (window.confirm('Êtes-vous sûr de vouloir supprimer ce post?')) return
     // console.log(id)
     axios
@@ -64,7 +67,7 @@ const ModifyPost = ({ id }) => {
         if (res.status == 200)
           setTimeout(function () {
             window.location.reload()
-          }, 1000)
+          }, 800)
         setPostModify(true)
       })
   }
@@ -76,11 +79,9 @@ const ModifyPost = ({ id }) => {
           className="popup-modal"
           trigger={
             <div>
-              {/* //   {(postInfo.userId == userId || userInfo.role == 'admin') && ( */}
               <div className="buttonModifyPost">
                 <button className="triggerButton">Modifier</button>
               </div>
-              {/* //   )} */}
             </div>
           }
           modal

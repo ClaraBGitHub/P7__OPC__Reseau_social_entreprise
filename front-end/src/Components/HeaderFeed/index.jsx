@@ -16,7 +16,7 @@ const HeaderFeed = () => {
     Accept: 'application/json',
   }
 
-  // If localstorage is empty, that's mean we aren't connected so go back to the connexion page
+  // If localstorage is empty, we are not connected so we go back to the login page
   if (!user || !token) {
     document.location.href = 'http://localhost:3000/login'
   }
@@ -40,16 +40,15 @@ const HeaderFeed = () => {
         <img src={WhiteLogo} alt="Logo Groupamania" />
       </Link>
       <div className="welcomeNav">
-        <div>
+        <span>
           <h1>Bienvenue {data.firstname}</h1>
-        </div>
+        </span>
         <span className="navbar">
           <Link
             className="navbar__signout"
             to="/login"
             onClick={() => Logout()}
           >
-            {' '}
             Se déconnecter
           </Link>
         </span>

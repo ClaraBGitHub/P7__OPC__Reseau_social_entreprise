@@ -5,6 +5,10 @@ img {
     padding: 15px;
     display: flex;
     align-items: center;
+    @media (max-width: $breakpoint-mobile) {
+       padding: 5px;
+       width : 100px;
+    }
 }
 
 .headerBloc {
@@ -15,23 +19,33 @@ img {
     width: 100%;
     max-height: 130px;
     padding: 10px;
+    @media (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+        max-height: 300px;
+        align-items: flex-start;
+    }
 }
 
 .navbar {
-    font-size: 22px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // max-width: 400px;
-     button {
-      width: 85%;
+    width: 60%;
+    @media (max-width: $breakpoint-mobile) {
+        flex-wrap: wrap;
+    }
+    &__signup {
       margin: 10px;
       border-radius: 8px;
       background: $tertiary-color;
       color: $Cream;
-      align-items: center;
-      padding: 10px 9px 10px 11px;
-      text-transform: uppercase;
+      padding: 12px;
+      text-decoration: none;
+      text-align: center;
+      font-size: 16px;
+      @media (max-width: $breakpoint-mobile) { 
+        padding: 5px;;
+      }
 
       &:hover {
         cursor: pointer;

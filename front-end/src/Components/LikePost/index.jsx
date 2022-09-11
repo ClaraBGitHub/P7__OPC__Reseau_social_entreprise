@@ -29,17 +29,13 @@ const LikePost = ({ id }) => {
       axios
         .post(`http://localhost:4200/api/post/${id}/like`, likeData, config)
         .then((res) => {
-          if (res.status == 200)
-            // document.location.reload()
-            setPostLiked(true)
+          if (res.status == 200) setPostLiked(true)
         })
     } else {
       axios
         .post(`http://localhost:4200/api/post/${id}/like`, dislikeData, config)
         .then((res) => {
-          if (res.status == 200)
-            // document.location.reload()
-            setPostLiked(false)
+          if (res.status == 200) setPostLiked(false)
         })
     }
   }

@@ -2,7 +2,6 @@
 
 
 .main {
-    background-color: $secondary-color;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,4 +10,5 @@
     align-items: center;
     display: flex;
     justify-content: center;  
+    // height: 100vh;
 }

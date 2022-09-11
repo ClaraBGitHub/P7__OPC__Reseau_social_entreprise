@@ -14,7 +14,6 @@ const DisplayPosts = () => {
       'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    // Accept: 'application/json',
   }
   useEffect(() => {
     axios
@@ -22,15 +21,11 @@ const DisplayPosts = () => {
       .then((res) => {
         SetPosts(res.data)
       })
-      .catch((error) => {
-        console.error(error)
-      })
+      .catch((error) => {})
   }, [])
 
   const LikingPost = (id) => {
-    axios.post(`api/post/${id}/like`, {
-      // headers: { Authorization: `Bearer ${jwtToken}` },
-    })
+    axios.post(`api/post/${id}/like`, {})
   }
   return (
     <div className="posts">

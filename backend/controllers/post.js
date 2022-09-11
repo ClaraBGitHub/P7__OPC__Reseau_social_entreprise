@@ -41,27 +41,29 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-  console.log("toto")
-
-  const postObject = req.file ?
-    {
-      ...JSON.parse(req.body.post),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body };
-
-    // User.findOne({_id: req.auth.userId})
-    // .then(user => {
-      // if (user.role =="admin" || req.auth.userId == user.userId) {
+    const postObject = req.file ?
+      {
+        title: req.body.title,
+        publication: req.body.publication,
+        // ...JSON.parse(req.body.post),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : 
+      { ...req.body };
+        Post.findOne({ _id: req.params.id })
+        .then(postWithFile => {
+        if (req.file && postWithFile.imageUrl) {
+          const filename = postWithFile.imageUrl.split('/images/')[1]; // Nous utilisons le fait de savoir que notre URL d'image contient un segment /images/ pour séparer le nom de fichier ;
+          fs.unlink(`images/${filename}`, () => {
         Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id }) // Le premier argument est l'objet de comparaison donc celui que l'on veut modifier, le 2nd argument est la nouvelle version de l'objet.
-        // L'utilisation du mot-clé new avec un modèle Mongoose crée par défaut un champ_id . Utiliser ce mot-clé générerait une erreur, car nous tenterions de modifier un champ immuable dans un document de la base de données. Par conséquent, nous devons utiliser le paramètre id de la requête pour configurer notre Post avec le même _id qu'avant.
-          .then(() => res.status(200).json({ message: 'Post modifié !'}))
-          .catch(error => res.status(400).json({ error }));
-      // } else {
-      //   res.status(403).json({
-      //     error: "Unauthorized request!"
-      //   });
-      // }
-    // })
+        .then(() => res.status(200).json({ message: 'Post modifié !'}))
+        .catch(error => res.status(400).json({ error }));
+          })
+        } else {
+        Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Post modifié !'}))
+        .catch(() => res.status(400).json({ 'message' : 'Post has not been updated !' }));
+        }
+      })
 };
 
 exports.deletePost = (req, res, next) => {
@@ -70,17 +72,17 @@ exports.deletePost = (req, res, next) => {
     if (user.role == "admin") {
       Post.findOne({ _id: req.params.id }) // Dans cette fonction, nous utilisons l'ID que nous recevons comme paramètre pour accéder au Post correspondant dans la base de données;
       .then((postAdmin) => {
-        if (req.file) {
+        if (postAdmin.imageUrl) {
           const filename = postAdmin.imageUrl.split('/images/')[1]; // Nous utilisons le fait de savoir que notre URL d'image contient un segment /images/ pour séparer le nom de fichier ;
           fs.unlink(`images/${filename}`, () => { // Nous utilisons ensuite la fonction unlink du package fs pour supprimer ce fichier, en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé ;
             Post.deleteOne({ _id: req.params.id })
               .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-              .catch(error => res.status(400).json({ "toto" : "totot"}));
+              .catch(error => res.status(400).json({ 'message' : 'Post still here !'}));
             });
         } else {
           Post.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-            .catch(error => res.status(400).json({ "toto" : "totot"}));
+            .catch(error => res.status(400).json({ 'message' : 'Post still here !'}));
         }
       })
     } else {
@@ -97,17 +99,17 @@ exports.deletePost = (req, res, next) => {
           });
           return
           }
-          if (req.file) {
+          if (post.imageUrl != null) {
             const filename = post.imageUrl.split('/images/')[1]; // Nous utilisons le fait de savoir que notre URL d'image contient un segment /images/ pour séparer le nom de fichier ;
             fs.unlink(`images/${filename}`, () => { // Nous utilisons ensuite la fonction unlink du package fs pour supprimer ce fichier, en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé ;
               Post.deleteOne({ _id: req.params.id })
                 .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-                .catch(error => res.status(400).json({ "toto" : "totot"}));
+                .catch(error => res.status(400).json({ "error" : "error"}));
             });
           }
         Post.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-          .catch(error => res.status(400).json({ "toto" : "totot"}));
+          .catch(error => res.status(400).json({ "error" : "error"}));
       })
     } 
   });
@@ -139,7 +141,6 @@ exports.moderatePost = (req, res, next) => {
     if (user.role == "admin") {
       Post.findOne({ _id: req.params.id })
       .then(post => {
-        // post.moderated = true;
         if (post.moderated === 0) { 
           post.moderated += 1;
         // Cancel Moderation

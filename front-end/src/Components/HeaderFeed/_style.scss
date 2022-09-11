@@ -1,20 +1,64 @@
 @import "../../Utils/Style/styleSettings";
 
-.headerBlocFeed {
-    width: calc(100% / 2);
+.headerBloc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-color;
+    width: 100%;
+    max-height: 130px;
+    padding: 10px;
+    @media (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+        max-height: 300px;
+        align-items: flex-start;
+    }
 }
+// .headerBlocFeed {
+//     width: calc(100% / 2);
+// }
 .welcomeNav {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    @media (max-width: $breakpoint-mobile) { 
+        padding: 5px;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+      }
 }
 .navbar {
-    &__signout {
-    color: white;
     display: flex;
     justify-content: flex-end;
-    padding: 10px;
+    align-items: center;
+    width: 60%;
+    @media (max-width: $breakpoint-mobile) {
+        flex-wrap: wrap;
     }
+    &__signout {
+        margin: 10px;
+        border-radius: 8px;
+        background: $tertiary-color;
+        color: $Cream;
+        padding: 12px;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        
+        @media (max-width: $breakpoint-mobile) { 
+          padding: 5px;
+          font-size: 12px;
+        }
+        &:hover {
+            cursor: pointer;
+            background: $secondary-color;
+            color: $tertiary-color;
+            transition: all 0.4s ease-out;
+             } 
+    }
+
 }
 
 h1 {
@@ -22,4 +66,20 @@ h1 {
     justify-content: flex-end;
     color: white;
     padding: 10px;
+    @media (max-width: $breakpoint-mobile) { 
+        font-size: 26px;
+        padding: 5px;
+        justify-content: flex-start;
+      }
+}
+
+img {
+    width : 200px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    @media (max-width: $breakpoint-mobile) {
+       padding: 5px;
+       width : 100px;
+    }
 }

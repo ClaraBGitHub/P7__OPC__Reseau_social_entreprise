@@ -18,7 +18,6 @@ const Card = () => {
       'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    // Accept: 'application/json',
   }
 
   useEffect(() => {
@@ -51,20 +50,16 @@ const Card = () => {
     formData.append('publication', publication)
     formData.append('date', dateActuelle)
     formData.append('image', selectedFile)
-    console.log(formData)
     axios
       .post('http://localhost:4200/api/post', formData, config)
       .then((res) => {
         if (res.status == 200) {
-          console.log(res)
         }
         setTimeout(function () {
           window.location.reload()
         }, 1000)
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      .catch((err) => {})
   }
 
   return (
