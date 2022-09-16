@@ -104,12 +104,13 @@ exports.deletePost = (req, res, next) => {
             fs.unlink(`images/${filename}`, () => { // Nous utilisons ensuite la fonction unlink du package fs pour supprimer ce fichier, en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé ;
               Post.deleteOne({ _id: req.params.id })
                 .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-                .catch(error => res.status(400).json({ "error" : "error"}));
+                .catch(error => res.status(400).json({error}));
             });
+          } else { 
+            Post.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
+            .catch(error => res.status(400).json({ error}));
           }
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Post delete successfully!'}))
-          .catch(error => res.status(400).json({ "error" : "error"}));
       })
     } 
   });
